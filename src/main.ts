@@ -51,6 +51,7 @@ export default async function run(): Promise<Results> {
     return { results };
   } catch (error) {
     const err = error as Error;
+    debug(`Error:\n${JSON.stringify(err, null, 2)}`);
     setFailed(err.message || err);
     return { error: err, results: [] };
   }
