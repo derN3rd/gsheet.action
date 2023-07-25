@@ -1,5 +1,6 @@
 import { debug, getInput, setFailed, setOutput } from '@actions/core';
 import GoogleSheet from 'google-sheet-cli/lib/lib/google-sheet';
+import { inspect } from 'util';
 import { ValidatedCommand, asyncForEach, validateCommands } from './lib';
 
 export interface Result {
@@ -51,7 +52,7 @@ export default async function run(): Promise<Results> {
     return { results };
   } catch (error) {
     const err = error as Error;
-    debug(`Error:\n${JSON.stringify(err, null, 2)}`);
+    debug(`Error:\n${inspect(err, false, 3)}`);
     setFailed(err.message || err);
     return { error: err, results: [] };
   }
